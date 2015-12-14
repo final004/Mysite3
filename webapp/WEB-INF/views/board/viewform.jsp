@@ -1,8 +1,7 @@
-<%@ page import="com.hanains.mysite.vo.BoardVo"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	BoardVo vo = (BoardVo)request.getAttribute("v");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,20 +20,20 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td><%=vo.getTitle() %></td>
+						<td>${v.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								<%=vo.getContent() %><br>
+								${v.content }<br>
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath}/board?a=list">글목록</a>
-					<a href="${pageContext.request.contextPath}/board?a=modifyform&no=<%=vo.getNo() %>">글수정</a>
+					<a href="${pageContext.request.contextPath}/board/listform">글목록</a>
+					<a href="${pageContext.request.contextPath}/board/modifyform?no=${v.no}">글수정</a>
 				</div>
 			</div>
 		</div>

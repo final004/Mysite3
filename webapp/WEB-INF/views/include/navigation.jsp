@@ -6,8 +6,8 @@
 	
 <div id="navigation">
 	<ul>
-		<li><a href="/mysite/main">문준성</a></li>
-		<li><a href="/mysite/guestbook?a=listform">방명록</a></li>
-		<li><a href="/mysite/board?a=list">게시판</a></li>
+		<li><a href="${pageContext.request.contextPath}/">문준성</a></li>
+		<li><a href="${pageContext.request.contextPath}/guestbook/listform">방명록</a></li>
+		<li><a href="${pageContext.request.contextPath}/board/listform">게시판</a></li>
 	</ul>
 </div>

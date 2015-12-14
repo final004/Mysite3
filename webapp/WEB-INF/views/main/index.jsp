@@ -17,7 +17,7 @@
 					<h2>안녕하세요. 문준성의 mysite에 오신 것을 환영합니다.</h2>
 					<p>
 						이 사이트는 웹 프로그램밍 실습과제 사이트입니다.<br> <br>
-						<br> <a href="${pageContext.request.contextPath}/guestbook?a=listform">방명록</a>에 글 남기기<br>
+						<br> <a href="${pageContext.request.contextPath}/guestbook/listform">방명록</a>에 글 남기기<br>
 					</p>
 				</div>
 			</div>
