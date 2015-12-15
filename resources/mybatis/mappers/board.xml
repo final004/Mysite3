@@ -8,7 +8,7 @@
 			select 
 			a.no, 
 			a.title, 
-			a.member_no as member_no,
+			a.member_no as memberNo,
 			b.name as name,
 			a.view_cnt,
 			to_char(a.reg_date, 'yyyy-mm-dd hh:mi:ss') as regDate
@@ -42,7 +42,7 @@
 		<![CDATA[
 			insert 
 			into board 
-			values ( board_no_seq.nextval, #{title}, #{content}, #{member_no}, 0, SYSDATE )
+			values ( board_no_seq.nextval, #{title}, #{content}, #{memberNo}, 0, SYSDATE )
 		]]>
 	</insert>
 
@@ -50,7 +50,7 @@
 		<![CDATA[
 			delete 
 			from board
-			where no=#{no}
+			where no=#{no} and member_no=#{memberNo}
 		]]>
 	</delete>	
 

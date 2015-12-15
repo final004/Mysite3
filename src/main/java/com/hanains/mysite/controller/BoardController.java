@@ -36,7 +36,7 @@ public class BoardController {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser==null){
 			System.out.println("fail");
-			return "/user/loginform";
+			return "/user/loginretry";
 		}
 		session.setAttribute("authUser", authUser);
 		return "/board/writeform";
@@ -49,21 +49,34 @@ public class BoardController {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser==null){
 			System.out.println("fail");
-			return "/user/loginform";
+			return "/user/loginretry";
 		}
 		session.setAttribute("authUser", authUser);
 		
 		Long noStr = authUser.getNo();
 		String no = noStr.toString();
-		vo.setMember_no(no);
+		vo.setMemberNo(no);
 		
 		boardService.insert(vo);
 		return "redirect:/board/listform";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@ModelAttribute BoardVo vo){
+	public String delete(HttpSession session,@ModelAttribute BoardVo vo){
 		System.out.println("delete 동작");
+		
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if(authUser==null){
+			System.out.println("fail");
+			return "/user/loginretry";
+		}
+		Long noStr = vo.getNo();
+		String no = noStr.toString();
+		Long memberNoStr = authUser.getNo();
+		String memberNo = memberNoStr.toString();
+		System.out.println(no);
+		vo.setMemberNo(memberNo);
+		
 		boardService.delete(vo);
 		return "redirect:/board/listform";
 	}
@@ -72,18 +85,9 @@ public class BoardController {
 	public String viewform(HttpSession session, @ModelAttribute BoardVo vo){
 		System.out.println("viewform 동작");
 		
-//		UserVo authUser = (UserVo) session.getAttribute("authUser");
-//		session.setAttribute("authUser", authUser);
-//		
-//		Long noStr = authUser.getNo();
-//		String no = noStr.toString();
-//		vo.setMember_no(no);
-//		BoardVo v = boardService.view(vo);
-//		session.setAttribute("v", v);
-		
 		Long noStr = vo.getNo();
 		String no = noStr.toString();
-		vo.setMember_no(no);
+		vo.setMemberNo(no);
 		BoardVo v = boardService.view(vo);
 		session.setAttribute("v", v);
 		
@@ -91,8 +95,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/modifyform")
-	public String modifyform(){
+	public String modifyform(HttpSession session){
 		System.out.println("modifyform 동작");
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if(authUser==null){
+			System.out.println("fail");
+			return "/user/loginretry";
+		}
+		session.setAttribute("authUser", authUser);
 		return "/board/modifyform";
 	}
 	
@@ -103,11 +113,10 @@ public class BoardController {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser==null){
 			System.out.println("fail");
-			return "/user/loginform";
+			return "/user/loginretry";
 		}
 		session.setAttribute("authUser", authUser);
 
-//		System.out.println(vo.getNo() + ":" + vo.getTitle() + ":" + vo.getContent());
 		vo.setTitle(vo.getTitle());
 		vo.setContent(vo.getContent());
 		vo.setNo(vo.getNo());

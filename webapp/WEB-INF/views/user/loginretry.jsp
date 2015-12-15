@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!doctype html>
 <html>
@@ -9,7 +12,7 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="user">
 				<form id="login-form" name="loginform" method="post"
@@ -18,11 +21,13 @@
 						name="email" type="text" value=""> <label
 						class="block-label">패스워드</label> <input name="password"
 						type="password" value=""> <input type="submit" value="로그인">
+						<p>해당 서비스를 이용하시려면</p>
+						<p>로그인을 해주시기 바랍니다.</p>
 				</form>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/include/navigation.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 	</div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
 	${count }
 
 	<div id="container">
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
@@ -44,9 +44,9 @@
 							<td>${vo.name }</td>
 							<td>${vo.view_cnt }</td>
 							<td>${vo.regDate }</td>
-							<td><a
-								href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
-								class="del">삭제</a></td>
+							<td>
+							<a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
+								class="a.del" >삭제 </a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -61,16 +61,16 @@
 						<li class="pg-next"><a href="#">다음 ▶</a></li>
 					</ul>
 				</div>
-				
-					<div class="bottom">
-						<a href="${pageContext.request.contextPath}/board/writeform"
-							id="new-book">글쓰기</a>
-					</div>
-				
+
+				<div class="bottom">
+					<a href="${pageContext.request.contextPath}/board/writeform"
+						id="new-book">글쓰기</a>
+				</div>
+
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/include/navigation.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/navigation.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 	</div>
 </body>
 </html>
