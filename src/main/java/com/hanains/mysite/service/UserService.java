@@ -2,9 +2,6 @@ package com.hanains.mysite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.hanains.mysite.dao.UserDao;
 import com.hanains.mysite.vo.UserVo;
 
@@ -19,7 +16,7 @@ public class UserService {
 	}
 	
 	public UserVo login(UserVo vo){
-		UserVo authUser = userDao.get(vo.getEmail(), vo.getPassword());
+		UserVo authUser = userDao.get(vo);
 		return authUser;
 	}
 }

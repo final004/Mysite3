@@ -16,8 +16,8 @@ public class GuestbookService {
 	
 	public List<GuestbookVo> list(){
 		System.out.println("데이터 목록");
-		List<GuestbookVo> list = guestbookDao.getList();
-		return list;
+		List<GuestbookVo> guestbookVo = guestbookDao.list();
+		return guestbookVo;
 	}
 	
 	public void insert(GuestbookVo vo){

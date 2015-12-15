@@ -43,7 +43,7 @@
 								href="${pageContext.request.contextPath}/board/viewform?no=${vo.no}">${vo.title}</a></td>
 							<td>${vo.name }</td>
 							<td>${vo.view_cnt }</td>
-							<td>${vo.date }</td>
+							<td>${vo.regDate }</td>
 							<td><a
 								href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
 								class="del">삭제</a></td>

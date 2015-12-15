@@ -72,10 +72,16 @@ public class BoardController {
 	public String viewform(HttpSession session, @ModelAttribute BoardVo vo){
 		System.out.println("viewform 동작");
 		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		session.setAttribute("authUser", authUser);
+//		UserVo authUser = (UserVo) session.getAttribute("authUser");
+//		session.setAttribute("authUser", authUser);
+//		
+//		Long noStr = authUser.getNo();
+//		String no = noStr.toString();
+//		vo.setMember_no(no);
+//		BoardVo v = boardService.view(vo);
+//		session.setAttribute("v", v);
 		
-		Long noStr = authUser.getNo();
+		Long noStr = vo.getNo();
 		String no = noStr.toString();
 		vo.setMember_no(no);
 		BoardVo v = boardService.view(vo);
