@@ -13,16 +13,14 @@
 	rel="stylesheet" type="text/css">
 </head>
 <body>
-
 	<c:set var="count" value="${fn:length(list)}"></c:set>
-	${count }
 
 	<div id="container">
 		<c:import url="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
-					action="${pageContext.request.contextPath}/board" method="post">
+					action="${pageContext.request.contextPath}/board/listform" method="post">
 					<input type="text" id="kwd" name="kwd" value=""> <input
 						type="submit" value="찾기">
 				</form>
@@ -42,14 +40,15 @@
 							<td><a
 								href="${pageContext.request.contextPath}/board/viewform?no=${vo.no}">${vo.title}</a></td>
 							<td>${vo.name }</td>
-							<td>${vo.view_cnt }</td>
+							<td>${vo.viewCnt }</td>
 							<td>${vo.regDate }</td>
 							<td>
 							<a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
-								class="a.del" >삭제 </a></td>
+								class="del" >삭제 </a></td>
 						</tr>
 					</c:forEach>
 				</table>
+				
 				<div class="pager">
 					<ul>
 						<li class="pg-prev"><a href="#">◀ 이전</a></li>
@@ -61,11 +60,15 @@
 						<li class="pg-next"><a href="#">다음 ▶</a></li>
 					</ul>
 				</div>
-
+				
+				<c:choose>
+				<c:when test="${!empty authUser }">
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath}/board/writeform"
 						id="new-book">글쓰기</a>
 				</div>
+				</c:when>
+				</c:choose>
 
 			</div>
 		</div>

@@ -10,7 +10,7 @@
 			a.title, 
 			a.member_no as memberNo,
 			b.name as name,
-			a.view_cnt,
+			a.view_cnt as viewCnt,
 			to_char(a.reg_date, 'yyyy-mm-dd hh:mi:ss') as regDate
 			from board a, member b
 			where a.member_no = b.no 
@@ -30,7 +30,7 @@
 		]]>
 	</select>
 	
-	<update id="view_cnt" parameterType="BoardVo">
+	<update id="viewCnt" parameterType="BoardVo">
 	<![CDATA[
 		update 
 		board 
@@ -62,5 +62,18 @@
 			where no=#{no}
 		]]>
 	</update>
-
+	
+	<select id="paging" resultType="BoardVo">
+		<![CDATA[
+			select *
+			from
+			(select rownum as rnum, C.*
+			from
+			(select a.no, a.title, b.name as name, a.view_cnt as viewCnt, to_char(a.reg_date, 'yyyy-mm-dd hh:mi:ss') as regDate
+			from board a, member b
+			where a.memberNo = b.no
+			order by group_no desc, order_no ASC) C)
+			where ( #{page } - 1 ) * #{pageSize } + 1 <= rnum and rnum <=  #{page } * #{pageSize }			
+		]]>
+	</select>
 </mapper>

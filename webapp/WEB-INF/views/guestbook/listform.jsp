@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<% pageContext.setAttribute( "newLine", "\n" ); %>
 <!doctype html>
 <html>
 <head>
@@ -14,7 +14,6 @@
 <body>
 
 	<c:set var="count" value="${fn:length(list)}"></c:set>
-	${count }
 
 	<div id="container">
 		<c:import url="/WEB-INF/views/include/header.jsp" />
@@ -50,7 +49,8 @@
 										href="${pageContext.request.contextPath}/guestbook/deleteform?no=${vo.no}">삭제</a></td>
 								</tr>
 								<tr>
-									<td colspan=4>${vo.message }<br>
+									<td colspan=4>
+										${fn:replace(vo.message, newLine, '<br>')}
 									</td>
 								</tr>
 							</table> <br>

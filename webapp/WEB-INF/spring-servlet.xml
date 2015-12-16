@@ -11,6 +11,9 @@
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 햔들러 -->
 	<mvc:default-servlet-handler />
 
+	<!-- the mvc resources tag does the magic 파일업로드처리 -->
+ 	<mvc:resources mapping="/profile-images/**" location="file:/temp/" />
+
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -37,7 +40,6 @@
 	<context:component-scan base-package="com.hanains.mysite" />
 
 	<!-- 기본 뷰 리졸버 -->
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -46,4 +48,15 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />
 	</bean>
+	
+	<!-- 멀티파트 리졸버 파일업로드처리2 -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 가능한 바이트크기 -->
+		<property name="maxUploadSize" value="52428800" />
+		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
+		<!-- property name="maxInMemorySize" value="52428800" /-->
+		<!-- defaultEncoding -->
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>	
 </beans>

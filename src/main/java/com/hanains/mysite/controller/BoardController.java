@@ -6,8 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hanains.mysite.service.BoardService;
 import com.hanains.mysite.vo.BoardVo;
@@ -43,7 +46,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/write")
-	public String write(HttpSession session, @ModelAttribute BoardVo vo){
+	public String write(HttpSession session, 
+			@ModelAttribute BoardVo vo,
+			@RequestParam("uploadFile")
+			MultipartFile multipartFile, 
+			Model model
+			){
 		System.out.println("write 동작");
 		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
@@ -56,7 +64,6 @@ public class BoardController {
 		Long noStr = authUser.getNo();
 		String no = noStr.toString();
 		vo.setMemberNo(no);
-		
 		boardService.insert(vo);
 		return "redirect:/board/listform";
 	}

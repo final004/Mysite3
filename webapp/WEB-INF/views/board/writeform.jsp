@@ -16,7 +16,7 @@
 		<c:import url="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post"
+				<form class="board-form" method="post" enctype="multipart/form-data"
 					action="${pageContext.request.contextPath}/board/write">
 					<table class="tbl-ex">
 						<tr>
@@ -32,6 +32,8 @@
 							<td><textarea id="content" name="content"></textarea></td>
 						</tr>
 					</table>
+					<label>업로드 파일:</label>
+						<input type="file" name="uploadFile"><br><br>
 					<div class="bottom">
 						<a href="${pageContext.request.contextPath}/board/listform">취소</a>
 						<input type="submit" value="등록">

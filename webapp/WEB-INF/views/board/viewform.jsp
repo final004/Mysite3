@@ -27,6 +27,13 @@
 					<tr>
 						<td class="label">내용</td>
 						<td>
+							<div class="result-images">
+								<c:if test="${not empty profileUrl }">
+									<img src="${pageContext.request.contextPath }${profileUrl }"
+										style="width: 150px">
+									<br>
+								</c:if>
+							</div>
 							<div class="view-content">
 								${v.content }<br>
 							</div>

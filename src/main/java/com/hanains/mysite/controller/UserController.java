@@ -19,18 +19,23 @@ public class UserController {
 	
 	@RequestMapping("/joinform")
 	public String joinform(){
-		System.out.println("JRebel Test");
+		System.out.println("joinform 동작");
 		return "/user/joinform";
 	}
 
 	@RequestMapping("/loginform")
 	public String loginform(){
-		System.out.println("JRebel Test");
+		System.out.println("loginform 동작");
 		return "/user/loginform";
 	}
 	
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo vo){
+		System.out.println(vo);
+		if(vo.getEmail()=="" || vo.getName()=="" || vo.getPassword()=="")
+		{
+			return "redirect:/user/joinform";
+		}
 		userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}
@@ -45,6 +50,10 @@ public class UserController {
 	public String login(HttpSession session, @ModelAttribute UserVo vo){
 		UserVo authUser = userService.login(vo);
 		System.out.println(authUser);
+		if(authUser==null){
+			System.out.println("fail");
+			return "/user/loginretry";
+		}
 		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}

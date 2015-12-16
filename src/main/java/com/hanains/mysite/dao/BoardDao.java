@@ -20,7 +20,7 @@ public class BoardDao {
 
 	public BoardVo view(BoardVo vo) {
 		BoardVo v = sqlSession.selectOne("board.view", vo);
-		sqlSession.update("view_cnt", vo);
+		sqlSession.update("viewCnt", vo);
 		return v;
 	}
 
