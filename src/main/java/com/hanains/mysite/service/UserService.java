@@ -19,4 +19,10 @@ public class UserService {
 		UserVo authUser = userDao.get(vo);
 		return authUser;
 	}
+
+	public UserVo getUser(String email) {
+		// TODO Auto-generated method stub
+		UserVo vo = userDao.getUser(email);
+		return vo;
+	}
 }

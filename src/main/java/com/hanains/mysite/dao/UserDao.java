@@ -20,4 +20,9 @@ public class UserDao {
 	public void insert(UserVo vo){
 		sqlSession.insert("user.insert", vo);
 	}
+	
+	public UserVo getUser(String email){
+		UserVo vo = sqlSession.selectOne("selectByEmail", email);
+		return vo;
+	}
 }
