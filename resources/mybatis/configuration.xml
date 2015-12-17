@@ -5,11 +5,13 @@
 		<typeAlias alias="UserVo" type="com.hanains.mysite.vo.UserVo" />
 		<typeAlias alias="GuestbookVo" type="com.hanains.mysite.vo.GuestbookVo" />
 		<typeAlias alias="BoardVo" type="com.hanains.mysite.vo.BoardVo" />
+		<typeAlias alias="BoardVo" type="com.hanains.mysite.vo.FileUploadVo" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/guestbook.xml" />
 		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/fileupload.xml" />
 	</mappers>
 </configuration>

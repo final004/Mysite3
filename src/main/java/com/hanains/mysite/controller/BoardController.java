@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hanains.mysite.annotation.Auth;
+import com.hanains.mysite.annotation.AuthUser;
 import com.hanains.mysite.service.BoardService;
 import com.hanains.mysite.vo.BoardVo;
 import com.hanains.mysite.vo.UserVo;
@@ -31,35 +33,22 @@ public class BoardController {
 		session.setAttribute("list", list);
 		return "/board/listform";
 	}
-	
+
+	@Auth
 	@RequestMapping("/writeform")
-	public String writeform(HttpSession session){
-		System.out.println("writeform 동작");
-		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser==null){
-			System.out.println("fail");
-			return "/user/loginretry";
-		}
-		session.setAttribute("authUser", authUser);
+	public String writeform(){
 		return "/board/writeform";
 	}
 	
+	@Auth
 	@RequestMapping("/write")
-	public String write(HttpSession session, 
+	public String write(@AuthUser UserVo authUser, 
 			@ModelAttribute BoardVo vo,
 			@RequestParam("uploadFile")
 			MultipartFile multipartFile, 
 			Model model
 			){
 		System.out.println("write 동작");
-		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser==null){
-			System.out.println("fail");
-			return "/user/loginretry";
-		}
-		session.setAttribute("authUser", authUser);
 		
 		Long noStr = authUser.getNo();
 		String no = noStr.toString();
@@ -68,15 +57,11 @@ public class BoardController {
 		return "redirect:/board/listform";
 	}
 	
+	@Auth
 	@RequestMapping("/delete")
-	public String delete(HttpSession session,@ModelAttribute BoardVo vo){
+	public String delete(@AuthUser UserVo authUser, @ModelAttribute BoardVo vo){
 		System.out.println("delete 동작");
-		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser==null){
-			System.out.println("fail");
-			return "/user/loginretry";
-		}
+	
 		Long noStr = vo.getNo();
 		String no = noStr.toString();
 		Long memberNoStr = authUser.getNo();
@@ -91,7 +76,6 @@ public class BoardController {
 	@RequestMapping("/viewform")
 	public String viewform(HttpSession session, @ModelAttribute BoardVo vo){
 		System.out.println("viewform 동작");
-		
 		Long noStr = vo.getNo();
 		String no = noStr.toString();
 		vo.setMemberNo(no);
@@ -101,29 +85,17 @@ public class BoardController {
 		return "/board/viewform";
 	}
 	
+	@Auth
 	@RequestMapping("/modifyform")
-	public String modifyform(HttpSession session){
+	public String modifyform(){
 		System.out.println("modifyform 동작");
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser==null){
-			System.out.println("fail");
-			return "/user/loginretry";
-		}
-		session.setAttribute("authUser", authUser);
 		return "/board/modifyform";
 	}
 	
+	@Auth
 	@RequestMapping("/modify")
-	public String modify(HttpSession session, @ModelAttribute BoardVo vo){
+	public String modify(@ModelAttribute BoardVo vo){
 		System.out.println("modify 동작");
-		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser==null){
-			System.out.println("fail");
-			return "/user/loginretry";
-		}
-		session.setAttribute("authUser", authUser);
-
 		vo.setTitle(vo.getTitle());
 		vo.setContent(vo.getContent());
 		vo.setNo(vo.getNo());
