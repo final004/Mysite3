@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+	<insert id="upload" parameterType="hashmap">
+		<![CDATA[
+		insert
+		into fileupload
+		(no, board_no, original_file_name, stored_file_name, file_size, regdate, regid, del_check)
+		values
+		(seq_fileupload_no.nextval, #{boardNo},#{orginalFileName},#{storedFileName},#{fileSize},
+		to_char(a.reg_date, 'yyyy-mm-dd hh:mi:ss') as regDate, #{regId}, #{delCheck}
+		)
+		]]>
+	</insert>
+</mapper>

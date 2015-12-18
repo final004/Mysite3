@@ -33,7 +33,7 @@
 						</tr>
 					</table>
 					<label>업로드 파일:</label>
-						<input type="file" name="uploadFile"><br><br>
+						<input type="file" name="upload"><br><br>
 					<div class="bottom">
 						<a href="${pageContext.request.contextPath}/board/listform">취소</a>
 						<input type="submit" value="등록">
