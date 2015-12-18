@@ -27,12 +27,11 @@
 		</triggeringPolicy>
 	</appender>
 
-	<logger name="com.hanains" level="WARN" additivity="false">
+	<logger name="com.hanains" level="INFO" additivity="false">
             <appender-ref ref="fileAppender" />
-            <appender-ref ref="consoleAppender" />
     </logger>
 
-	<root level="ERROR">
+	<root level="WARN">
 		<appender-ref ref="consoleAppender" />
 	</root>
 </configuration>

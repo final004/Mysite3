@@ -51,6 +51,7 @@ public class BoardController {
 		return "/board/writeform";
 	}
 	
+	@Auth
 	@RequestMapping("/write")
 	public String write(@AuthUser UserVo authUser,
 			@ModelAttribute BoardVo vo
@@ -58,6 +59,7 @@ public class BoardController {
 			//@RequestParam("upload") MultipartFile multipartFile, 
 			//Model model
 			){
+		
 		Long noStr = authUser.getNo();
 		String no = noStr.toString();
 		vo.setMemberNo(no);
