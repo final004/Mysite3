@@ -58,11 +58,6 @@
 
 	<!-- Interceptors -->
 	<mvc:interceptors>
-
-		<!-- <mvc:interceptor> <mvc:mapping path="/board/**" /> <bean class="com.hanains.mysite.interceptor.MyInterceptor" 
-			/> </mvc:interceptor> <mvc:interceptor> <mvc:mapping path="/user/**" /> <bean 
-			class="com.hanains.mysite.interceptor.MyInterceptor2" /> </mvc:interceptor> -->
-
 		<mvc:interceptor>
 			<mvc:mapping path="/user/login" />
 			<bean class="com.hanains.mysite.interceptor.AuthLoginInterceptor" />

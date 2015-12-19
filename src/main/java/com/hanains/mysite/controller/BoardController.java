@@ -1,6 +1,7 @@
 package com.hanains.mysite.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hanains.mysite.annotation.Auth;
 import com.hanains.mysite.annotation.AuthUser;
@@ -27,10 +30,17 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping("/listform")
-	public String list(HttpSession session){
+	public String list(HttpSession session,
+			@RequestParam(value="p", required=true, defaultValue="1") Long page,
+			Model model
+			){
+
 		List<BoardVo> list = boardService.list();
 		System.out.println(list);
 		session.setAttribute("list", list);
+		
+		Map<String, Object> map = boardService.listBoard(list, page);
+		model.addAttribute("listData", map);
 		
 		LOG.debug("#BoardController(list) - debug log" );
 		LOG.info("#BoardController(list) - info log" );
@@ -59,7 +69,10 @@ public class BoardController {
 			//@RequestParam("upload") MultipartFile multipartFile, 
 			//Model model
 			){
-		
+		if(vo.getTitle().trim().length()==0 || vo.getContent().trim().length()==0)
+		{
+			return "redirect:/board/writeform";
+		}
 		Long noStr = authUser.getNo();
 		String no = noStr.toString();
 		vo.setMemberNo(no);

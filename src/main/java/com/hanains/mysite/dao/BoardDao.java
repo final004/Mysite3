@@ -1,6 +1,9 @@
 package com.hanains.mysite.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,16 @@ public class BoardDao {
 		List<BoardVo> list = sqlSession.selectList("board.list");
 		return list;
 	}
+	
+	public List<BoardVo> getList(Long page, Integer pageSize) { 
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		map.put( "page", page ); 
+		map.put( "pageSize", pageSize );
+		 		 
+		List<BoardVo> list = sqlSession.selectList( "board.paging", map ); 
+		 		 
+		return list; 
+	} 
 
 	public BoardVo view(BoardVo vo) {
 		BoardVo v = sqlSession.selectOne("board.view", vo);

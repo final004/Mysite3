@@ -20,7 +20,8 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
-					action="${pageContext.request.contextPath}/board/listform" method="post">
+					action="${pageContext.request.contextPath}/board/listform"
+					method="post">
 					<input type="text" id="kwd" name="kwd" value=""> <input
 						type="submit" value="찾기">
 				</form>
@@ -34,7 +35,8 @@
 						<th>&nbsp;</th>
 					</tr>
 
-					<c:forEach items="${list}" var="vo" varStatus="status">
+					<c:set var='count' value='${fn:length(listData.list)}' />
+					<c:forEach items="${listData.list}" var="vo" varStatus="status">
 						<tr>
 							<td>${count-status.index }</td>
 							<td><a
@@ -42,32 +44,52 @@
 							<td>${vo.name }</td>
 							<td>${vo.viewCnt }</td>
 							<td>${vo.regDate }</td>
-							<td>
-							<a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
-								class="del" >삭제 </a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/board/delete?no=${vo.no}"
+								class="del">삭제 </a></td>
 						</tr>
 					</c:forEach>
 				</table>
-				
+
 				<div class="pager">
 					<ul>
-						<li class="pg-prev"><a href="#">◀ 이전</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li class="disable">4</li>
-						<li class="disable">5</li>
-						<li class="pg-next"><a href="#">다음 ▶</a></li>
+						<c:if test="${listData.prevPage > 0 }">
+							<li class="pg-prev"><a
+								href="${pageContext.request.contextPath }/board/listform?p=${listData.prevPage }">◀이전</a></li>
+						</c:if>
+						<c:forEach begin="${listData.startPage }"
+							end="${listData.endPage }" var="pageIndex" step="1">
+							<c:choose>
+								<c:when test="${pageIndex > listData.pageCount }">
+									<li class="disable">${pageIndex }</li>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${pageIndex == listData.currentPage }">
+											<li>${pageIndex }</li>
+										</c:when>
+										<c:otherwise>
+											<li><a
+												href="${pageContext.request.contextPath }/board/listform?p=${pageIndex }">${pageIndex}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${listData.nextPage > 0 }">
+							<li class="pg-next"><a
+								href="${pageContext.request.contextPath }/board/listform?p=${listData.nextPage }">다음▶</a></li>
+						</c:if>
 					</ul>
 				</div>
-				
+
 				<c:choose>
-				<c:when test="${!empty authUser }">
-				<div class="bottom">
-					<a href="${pageContext.request.contextPath}/board/writeform"
-						id="new-book">글쓰기</a>
-				</div>
-				</c:when>
+					<c:when test="${!empty authUser }">
+						<div class="bottom">
+							<a href="${pageContext.request.contextPath}/board/writeform"
+								id="new-book">글쓰기</a>
+						</div>
+					</c:when>
 				</c:choose>
 
 			</div>

@@ -40,7 +40,7 @@ public class GuestbookController {
 	@RequestMapping("/insert")
 	public String insert(@ModelAttribute GuestbookVo vo){
 		System.out.println(vo);
-		if(vo.getName()=="" || vo.getPassword()=="" || vo.getMessage()=="")
+		if(vo.getName().trim().length()==0 || vo.getPassword().trim().length()==0 || vo.getMessage().trim().length()==0)
 		{
 			return "redirect:/guestbook/listform";
 		}

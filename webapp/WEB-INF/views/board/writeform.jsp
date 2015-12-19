@@ -25,7 +25,7 @@
 
 						<tr>
 							<td class="label">제목</td>
-							<td><input type="text" name="title"></td>
+							<td><input type="text" name="title" ></td>
 						</tr>
 						<tr>
 							<td class="label">내용</td>
@@ -33,7 +33,7 @@
 						</tr>
 					</table>
 					<label>업로드 파일:</label>
-						<input type="file" name="upload"><br><br>
+						<input type="file" name="board_file"><br><br>
 					<div class="bottom">
 						<a href="${pageContext.request.contextPath}/board/listform">취소</a>
 						<input type="submit" value="등록">

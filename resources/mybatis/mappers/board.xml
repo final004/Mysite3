@@ -62,23 +62,17 @@
 		set view_cnt = view_cnt + 1 where no=#{no}
 	]]>
 	</update>
-	
-	<update id="updateOrderNo" parameterType="long">
+
+	<select id="paging" resultType="BoardVo" parameterType="map">
 		<![CDATA[
-		update board
-		   set order_no = order_no + 1		
-         where order_no > #{parentOrderNo }
-		]]>			
-	</update>	
-	
-	<select id="paging" resultType="BoardVo" parameterType="long">
-		<![CDATA[
-			select *
-			from(select rownum as rnum, C.*
-					from(select a.no, a.title, b.name as name, a.view_cnt as viewCnt, to_char(a.reg_date, 'yyyy-mm-dd hh:mi:ss') as regDate
-						from board a, member b where a.memberNo = b.no
-						order by group_no desc, order_no ASC) C)
-					where ( #{page } - 1 ) * #{pageSize } + 1 <= rnum and rnum <=  #{page } * #{pageSize }			
-		]]>
+		select * 
+		  from ( select rownum as rnum, c.*
+		  from ( select a.no, a.title, a.member_no as memberNo, b.name as name, a.view_cnt as viewCnt, to_char( a.reg_date, 'yyyy-mm-dd hh:mi:ss' ) as regDate 
+						   from board a, member b
+						   where a.member_no = b.no
+						   order by regDate desc) c)
+	     where ( #{page }-1 )*#{pageSize } + 1 <= rnum and rnum <= #{page }*#{pageSize }
+		]]>	
 	</select>
+
 </mapper>
