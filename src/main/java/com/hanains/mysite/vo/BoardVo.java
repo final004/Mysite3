@@ -1,5 +1,7 @@
 package com.hanains.mysite.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVo {
 
 	private long no;
@@ -9,6 +11,11 @@ public class BoardVo {
 	private String content;
 	private String regDate;
 	private String viewCnt;
+	private MultipartFile boardFile;
+	private String fileName;
+	private int reRef;
+	private int reLev;
+	private int reSeq;
 	
 	public long getNo() {
 		return no;
@@ -46,16 +53,48 @@ public class BoardVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	
 	public String getViewCnt() {
 		return viewCnt;
 	}
 	public void setViewCnt(String viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	public MultipartFile getBoardFile() {
+		return boardFile;
+	}
+	public void setBoardFile(MultipartFile boardFile) {
+		this.boardFile = boardFile;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public int getReRef() {
+		return reRef;
+	}
+	public void setReRef(int reRef) {
+		this.reRef = reRef;
+	}
+	public int getReLev() {
+		return reLev;
+	}
+	public void setReLev(int reLev) {
+		this.reLev = reLev;
+	}
+	public int getReSeq() {
+		return reSeq;
+	}
+	public void setReSeq(int reSeq) {
+		this.reSeq = reSeq;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", memberNo=" + memberNo + ", name=" + name + ", content="
-				+ content + ", regDate=" + regDate + ", viewCnt=" + viewCnt + "]";
+				+ content + ", regDate=" + regDate + ", viewCnt=" + viewCnt + ", boardFile=" + boardFile + ", fileName="
+				+ fileName + ", reRef=" + reRef + ", reLev=" + reLev + ", reSeq=" + reSeq + "]";
 	}
+
 }
